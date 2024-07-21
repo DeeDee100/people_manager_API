@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.onsafety.teste_safety.models.Pessoa;
 import com.onsafety.teste_safety.services.PessoaService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +30,7 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @PostMapping
-    public Pessoa creatPessoa(@RequestBody Pessoa pessoa) {
+    public Pessoa creatPessoa(@RequestBody @Valid Pessoa pessoa) {
         return pessoaService.savePessoa(pessoa);
     }
 
