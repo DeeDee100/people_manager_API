@@ -16,4 +16,6 @@ public interface PessoaService {
 
     Pessoa updatePessoaById(Long id, Pessoa pessoa);
 
+    void deleteById(Long id);
+
 }

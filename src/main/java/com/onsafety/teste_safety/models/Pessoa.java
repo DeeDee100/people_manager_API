@@ -2,12 +2,16 @@ package com.onsafety.teste_safety.models;
 
 import java.time.LocalDate;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "pessoa")
@@ -17,9 +21,12 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Email(message = "Email Inválido")
     private String name;
 
     @Column(unique = true)
+    @CPF(message = "CPF Inválido")
+    @Size(max = 11)
     private String cpf;
     
     private LocalDate dataNascimento;

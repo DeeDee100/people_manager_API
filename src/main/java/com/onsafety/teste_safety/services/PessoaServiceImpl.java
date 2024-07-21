@@ -18,6 +18,7 @@ public class PessoaServiceImpl implements PessoaService{
     private PessoaRepository pessoaRepository;
 
     @Override
+    // TODO: Add validação de duplicidade de cpf
     public Pessoa savePessoa(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
@@ -61,4 +62,10 @@ public class PessoaServiceImpl implements PessoaService{
         }
         return null;
     }
+
+    @Override
+    public void deleteById(Long id) {
+        pessoaRepository.deleteById(id);
+    }
+
 }
