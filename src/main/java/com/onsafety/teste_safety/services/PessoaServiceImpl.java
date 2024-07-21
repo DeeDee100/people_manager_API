@@ -37,14 +37,6 @@ public class PessoaServiceImpl implements PessoaService{
         return null;
     }
 
-    @Override
-    public String deleteDepartmentById(Long id) {
-        if (pessoaRepository.findById(id).isPresent()) {
-            pessoaRepository.deleteById(id);
-            return "Pessoa deleted successfully";
-        }
-        return "No such pessoa in the database";
-    }
 
     @Override
     public Pessoa updatePessoaById(Long id, Pessoa pessoa) {
@@ -57,6 +49,15 @@ public class PessoaServiceImpl implements PessoaService{
                 originalPessoa.setName(pessoa.getName());
             }
             return pessoaRepository.save(originalPessoa);
+        }
+        return null;
+    }
+
+    @Override
+    public Pessoa getByCpf(String cpf) {
+        Optional<Pessoa> pessoa = pessoaRepository.findByCpf(cpf);
+        if (pessoa.isPresent()) {
+            return pessoa.get();
         }
         return null;
     }

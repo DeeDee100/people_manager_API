@@ -12,7 +12,8 @@ public interface PessoaService {
 
     Pessoa getPessoaById(Long id);
 
+    Pessoa getByCpf(String cpf);
+
     Pessoa updatePessoaById(Long id, Pessoa pessoa);
 
-    String deleteDepartmentById(Long id);
 }
