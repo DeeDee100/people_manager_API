@@ -46,7 +46,7 @@ public class PessoaController {
     }
 
     @PutMapping("/{id}")
-    public Pessoa updatPessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) {
+    public Pessoa updatPessoa(@PathVariable Long id, @RequestBody @Valid Pessoa pessoa)  {
         return pessoaService.updatePessoaById(id, pessoa);        
     }
 

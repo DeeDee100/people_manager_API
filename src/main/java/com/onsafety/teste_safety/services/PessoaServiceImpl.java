@@ -3,6 +3,7 @@ package com.onsafety.teste_safety.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import com.onsafety.teste_safety.models.Pessoa;
 import com.onsafety.teste_safety.repository.PessoaRepository;
 
@@ -18,7 +19,6 @@ public class PessoaServiceImpl implements PessoaService{
     private PessoaRepository pessoaRepository;
 
     @Override
-    // TODO: Add validação de duplicidade de cpf
     public Pessoa savePessoa(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
@@ -41,10 +41,10 @@ public class PessoaServiceImpl implements PessoaService{
 
     @Override
     public Pessoa updatePessoaById(Long id, Pessoa pessoa) {
-        Optional<Pessoa> pessoa1 = pessoaRepository.findById(id);
+        Optional<Pessoa> pessoaToUpdate = pessoaRepository.findById(id);
 
-        if (pessoa1.isPresent()) {
-            Pessoa originalPessoa = pessoa1.get();
+        if (pessoaToUpdate.isPresent()) {
+            Pessoa originalPessoa = pessoaToUpdate.get();
 
             if (Objects.nonNull(pessoa.getName()) && !"".equalsIgnoreCase(pessoa.getName())) {
                 originalPessoa.setName(pessoa.getName());
@@ -56,11 +56,8 @@ public class PessoaServiceImpl implements PessoaService{
 
     @Override
     public Pessoa getByCpf(String cpf) {
-        Optional<Pessoa> pessoa = pessoaRepository.findByCpf(cpf);
-        if (pessoa.isPresent()) {
-            return pessoa.get();
-        }
-        return null;
+        Pessoa pessoa = pessoaRepository.findByCpf(cpf).orElseThrow(NoSuchElementException::new);
+        return pessoa;
     }
 
     @Override
