@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handle(NoSuchElementException exception) {
-        logger.error("Pessoa nao encontrada", exception);
+        logger.error("Pessoa nao encontrada byId", exception);
         return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
     }
 }
