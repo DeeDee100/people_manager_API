@@ -6,7 +6,6 @@
 
 FROM maven:3.8.3-openjdk-17 AS build
 COPY src /home/app/src
-COPY frontend /home/frontend
 COPY pom.xml /home/app
 RUN mvn clean package  -Dmaven.test.skip -f /home/app/pom.xml
 EXPOSE 8080
