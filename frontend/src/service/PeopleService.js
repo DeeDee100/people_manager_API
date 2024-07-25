@@ -1,13 +1,12 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/pessoas";
+const BASE_URL = "http://localhost:8080/api/pessoas";
 class PeopleService{
 
-    //**Method to get all employee from our api or database */
     getAllPeople(){
         return axios.get(BASE_URL);
     }
-    /**Method to save employee */
+    
     savePeople(employeeData){
         return axios.post(BASE_URL, employeeData);
     }

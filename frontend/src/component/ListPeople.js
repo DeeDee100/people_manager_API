@@ -12,7 +12,7 @@ const ListPeopleComponent = () => {
 
     function getAllPeople() {
         PeopleService.getAllPeople()
-            .then(res => { setpeopleArray(res.data); console.log(res) })
+            .then(res => { setpeopleArray(res.data); console.log(res.data) })
             .catch(e => console.log(e));
     }
     function deletePeople(e, id) {
@@ -27,18 +27,20 @@ const ListPeopleComponent = () => {
             <h2 className='text-center mb-4'>Lista Pessoas</h2>
             <table className='table table-bordered table striped'>
                 <thead>
-                    <th>Pessoa ID</th>
-                    <th>Pessoa Nome</th>
-                    <th>Pessoa CPF</th>
-                    <th>Pessoa Email</th>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Email</th>
+                    <th>Data de Nascimento</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
                     {peopleArray.map(people =>
                         <tr id={people.id}>
                             <td>{people.id}</td>
-                            <td>{people.firstName}</td>
-                            <td>{people.cpf}</td>
+                            <td>{people.name}</td>
+                            <td>{people.cpf.replace(/^[0-9]{8}/gm, '*********')}</td>
+                            <td>{people.dataNascimento}</td>
                             <td>{people.email}</td>
                             <td>
                                 <Link to={`/add-people/${people.id}`} className='btn btn-info' href="">Update</Link> {" "}
