@@ -21,7 +21,7 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @Email(message = "Email Inválido")
+    
     private String name;
 
     @Column(unique = true)
@@ -32,6 +32,7 @@ public class Pessoa {
     private LocalDate dataNascimento;
     
     @Column(unique = true)
+    @Email(message = "Email Inválido")
     private String email;
 
 
