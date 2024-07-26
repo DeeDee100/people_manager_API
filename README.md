@@ -4,7 +4,8 @@ Esse projeto consiste em um CRUD simples para controle de pessoas.
 ## Como rodar o projeto
 * Clonar o repositório 
   * https://github.com/DeeDee100/desafio_Bhub.git
-* Rodar `docker compose up` e pronto, o frontend do projeto estará online na port 3000
+* Rodar `docker compose up` e pronto, o frontend do projeto estará online em http://localhost:3000/
+* Após subir o projeto, as docs do backend estão em http://localhost:8080/swagger-ui/index.html
 
 ### Tecnologias utilizadas
 * Java - SpringBoot
