@@ -1,24 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import PeopleService from '../service/PeopleService';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { cpf  as cpfValidator} from 'cpf-cnpj-validator'; 
 
 const AddPeople = () => {
-    /** Variables and method to collect and store inputes */
+
     const [name, setName] = useState('');
     const [cpf, setCPF] = useState('');
     const [email, setEmail] = useState('');
-    const [dataNascimento, setDataNascimento] = useState('');
+    const [dataNascimento, setDataNascimento] = useState();
+    const [errors, setError] = useState(false)
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const peopleData = { name, cpf, email }; //bundle the inpute from user
+    const peopleData = { name, cpf, email, dataNascimento };
 
-    /**send data to api and navigate when succesful */
+    const changeValue = e => {
+        
+        if(!cpfValidator.isValid(e.target.value)){
+            setError(true)
+        }
+
+        setCPF(e.target.value);
+      };
+
     function savePeople(e) {
         e.preventDefault();
 
-        if (peopleData.name !== "" && peopleData.cpf !== "" && peopleData.email != "") {
-            /**If id is present in the parameter, it should update else it should save */
+        if (errors) {
+            alert("CPF Inválido!")
+            setError(false)
+            return
+        }
+
+        if (peopleData.name !== "" && peopleData.cpf !== "" && peopleData.email != ""  && peopleData.dataNascimento != "") {
             if (id) {
                 PeopleService.updatePeople(id, peopleData)
                     .then(navigate("/pessoas"))
@@ -30,7 +45,7 @@ const AddPeople = () => {
             }
 
         } else {
-            alert("Please, fill in all inputes");
+            alert("Por favor prencha todos os campos.");
         }
     }
 
@@ -71,7 +86,7 @@ const AddPeople = () => {
                                 <div className='form-group mb-2'>
                                     <input className='form-control'
                                         value={cpf}
-                                        onChange={(e) => setCPF(e.target.value)}
+                                        onChange={changeValue}
                                         type="text" placeholder='Enter CPF' />
                                 </div>
                                 <div className='form-group mb-2'>
@@ -83,9 +98,11 @@ const AddPeople = () => {
                                 <div className='form-group mb-2'>
                                     <input className='form-control'
                                         value={dataNascimento}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        type="email" placeholder='Enter Data de Aniversário' />
+                                        name="dataNascimento"
+                                        onChange={(e) => setDataNascimento(e.target.value)}
+                                        type="date" placeholder='Data de Aniversário' />
                                 </div>
+
                                 <button onClick={(e) => savePeople(e)} className='btn btn-success'>Save</button> {" "}
                                 <Link to={"/pessoas"} className='btn btn-danger' href="">Cancel</Link>
                             </form>

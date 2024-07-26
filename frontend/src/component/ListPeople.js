@@ -30,8 +30,8 @@ const ListPeopleComponent = () => {
                     <th>ID</th>
                     <th>Nome</th>
                     <th>CPF</th>
-                    <th>Email</th>
                     <th>Data de Nascimento</th>
+                    <th>Email</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
